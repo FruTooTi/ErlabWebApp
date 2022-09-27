@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErlabWebAPI", "ErlabWebAPI\ErlabWebAPI.csproj", "{D32E2A93-11E5-4D59-A90E-71465F997408}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D32E2A93-11E5-4D59-A90E-71465F997408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32E2A93-11E5-4D59-A90E-71465F997408}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32E2A93-11E5-4D59-A90E-71465F997408}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32E2A93-11E5-4D59-A90E-71465F997408}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44D4BD42-A190-4E1B-932B-D291C0137FC8}
+	EndGlobalSection
+EndGlobal

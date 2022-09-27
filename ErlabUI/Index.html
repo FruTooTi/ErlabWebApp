@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Workshop</title>
+    <meta charset="utf-8" />
+    <style>
+        ::-webkit-scrollbar {
+            height: 1.3em;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2F2F2F;
+            box-shadow: 5px 10px 50px #2e2e2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #444444;
+            border-radius: 10px;
+            border: .3em solid #2F2F2F;
+        }
+
+        .container {
+            position: fixed;
+            display: flex;
+            padding: 0;
+            margin: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #373737;
+        }
+
+        .categoryMenu {
+            background-color: #4a4a4a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 400px;
+            box-shadow: 5px 10px 50px #2e2e2e;
+            z-index: 1;
+        }
+
+        .subCategoriesMenu {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .subCategoryRow {
+            position: relative;
+            flex-direction: column;
+            display: flex;
+            z-index: 3;
+            width: 100%;
+            height: 50%;
+            margin-top: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            margin-left: 0px;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 10px 15px 20px #2f2f2f;
+        }
+
+        .categoryElement {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            align-items: center;
+            font-family: Arial;
+            text-overflow: ellipsis;
+            font-size: 28px;
+            color: white;
+            max-width: 280px;
+            width: 280px;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding-top: 30px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+            .categoryElement:hover .title {
+                display: flex;
+                position: relative;
+            }
+
+            .categoryElement:hover .imagePanel {
+                height: 90%;
+                width: 90%;
+            }
+
+            .categoryElement:hover {
+                padding-top: 2px;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+        .imagePanel {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background-color: #4b4b4b;
+            box-shadow: 10px 15px 20px #2f2f2f;
+        }
+
+        .title {
+            align-content: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+            width: 100%;
+            display: none;
+            margin-top: 5px;
+            padding: 0;
+        }
+
+        .mainCategoryElement {
+            box-sizing: border-box;
+            padding-left: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            font-size: 32px;
+            font-family: Arial;
+            color: white;
+            width: 100%;
+            height: 100px;
+        }
+
+            .mainCategoryElement:hover {
+                background-color: #7d8084;
+                box-shadow: 5px 10px 50px #373737;
+            }
+
+        #target {
+            position: sticky;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            width: 100%;
+            height: 100px;
+            min-height: 100px;
+        }
+
+        .targetColor {
+            background-color: #7d8084;
+        }
+
+        .mainCategoryPanel {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        .elementPanel {
+            display: inline-flex;
+        }
+
+        .section {
+            display: inline-flex;
+            position: relative;
+            height: 90%;
+        }
+
+        .elementContainer {
+            display: inline-flex;
+            width: 100%;
+            height: 90%;
+        }
+
+        .back {
+            height: 100%;
+            width: 100px;
+            position: absolute;
+            left: 0;
+            background: linear-gradient(-90deg, rgba(2,0,36,0) 0%, rgba(55,55,55,1) 75%);
+            color: transparent;
+            z-index: 4;
+        }
+
+            .back:hover {
+                background: linear-gradient(-90deg, rgba(2,0,36,0) 0%, rgba(55,55,55,1) 35%);
+            }
+
+        .next {
+            height: 100%;
+            width: 100px;
+            position: absolute;
+            right: 0;
+            background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(55,55,55,1) 75%);
+            color: transparent;
+            z-index: 4;
+        }
+
+            .next:hover {
+                background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(55,55,55,1) 35%);
+            }
+
+        .display-none {
+            display: none;
+        }
+
+        .display-flex {
+            display: flex;
+        }
+
+        .blur {
+            filter: blur(8px);
+        }
+
+        .infoContainer {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            top: 0;
+            left: 0;
+            position: fixed;
+            align-items: center;
+            justify-content: center;
+            z-index: 8;
+        }
+
+        .info {
+            width: 100%;
+            height: 500px;
+            background-color: #d1d1d1;
+            display: flex;
+        }
+
+        .infoImg {
+            height: 100%;
+            width: 35%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+
+        .contentImg {
+            width: 250px;
+            height: 400px;
+            margin-top: -30px;
+            box-shadow: 10px 15px 20px #2f2f2f;
+        }
+
+        .infoScrn {
+            font-family: Arial;
+            font-size: 24px;
+            height: 100%;
+            width: 65%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .contentTtl {
+            width: 70%;
+            height: 20%;
+            font-size: 30px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: black;
+        }
+
+        .contentImdb {
+            width: 70%;
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: black;
+        }
+
+        .contentDesc {
+            width: 70%;
+            height: 60%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            word-wrap: break-word;
+            text-align: center;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow: hidden;
+            color: black;
+        }
+
+        .rowTitle {
+            width: 100%;
+            height: 10%;
+            font-size: 32px;
+            font-family: Arial;
+            padding-left: 40px;
+            color: white;
+        }
+
+        #upper {
+            flex-direction: column-reverse;
+        }
+
+        .keytarget {
+            padding-top: 2px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .keytarget .imagePanel {
+            height: 90%;
+            width: 90%;
+        }
+
+        .keytarget .title {
+            display: flex;
+            position: relative;
+        }
+    </style>
+    <!--Form for films-->
+
+    <!--<div class="categoryElement">
+        <div class="imagePanel"></div>
+        <div class="title">Vizyondakiler</div>
+    </div>-->
+
+    <!--Form for info screen-->
+
+    <!--<div class="info">
+        <div class="infoImg" id="infoImage">
+            <img class="contentImg" id="contentImage" />
+        </div>
+        <div class="infoScrn" id="infoScreen">
+            <div class="contentTtl" id="contentTitle">HELLO</div>
+            <div class="contentImdb" id="contentImdbPoint">HELLO</div>
+            <div class="contentDesc" id="contentDescription">HELLO</div>
+        </div>
+    </div>-->
+
+    <!--Form for main category element-->
+
+    <!--<div class="mainCategoryElement">Home</div>-->
+</head>
+<body>
+    <div class="infoContainer display-none" id="infoBase">
+    </div>
+    <div class="container" id="main">
+        <div class="categoryMenu" id="categoryMenu">
+            <div id="upper" class="mainCategoryPanel">
+            </div>
+            <div id="target" class="target targetColor">
+            </div>
+            <div id="lower" class="mainCategoryPanel">
+            </div>
+        </div>
+        <div class="subCategoriesMenu" id="subCategoriesMenu">
+        </div>
+    </div>
+    <script src="appInit.js"></script>
+    <script src="FetchData.js"></script>
+    <script src="ModelCache.js"></script>
+    <script src="ModelManager.js"></script>
+    <script src="SubCategory.js"></script>
+    <script src="MainCategory.js"></script>
+    <script src="CategorySection.js"></script>
+    <script src="CategoryElement.js"></script>
+    <script src="InfoPanel.js"></script>
+    <script src="Display.js"></script>
+    <script src="Navigator.js"></script>
+    <script src="Configuration.js"></script>
+</body>
+</html>
